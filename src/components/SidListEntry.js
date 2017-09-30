@@ -10,7 +10,7 @@ class SidListEntry extends Component {
     return (
       <ListItem button onClick={onClick}>
         <Avatar>{icon}</Avatar>
-        <ListItemText primary={name} secondary={sid} />
+        <ListItemText primary={`'${name}'`} secondary={sid} />
         <ListItemIcon>
           <RightArrowIcon />
         </ListItemIcon>
