@@ -20,7 +20,6 @@
     "react-json-view": "^1.13.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.14",
     "styled-components": "^2.2.0",
     "twilio": "^3.7.0",
     "twilio-common": "^0.1.7",
@@ -39,7 +38,8 @@
   "proxy": "http://localhost:8081",
   "devDependencies": {
     "nodemon": "^1.12.1",
-    "npm-run-all": "^4.1.1"
+    "npm-run-all": "^4.1.1",
+    "react-scripts": "1.0.14"
   },
   "license": "MIT",
   "author": {
