@@ -1,6 +1,10 @@
 {
   "name": "twilio-sync-inspector",
   "version": "0.1.0",
+  "main": "bin/index.js",
+  "bin": {
+    "twilio-sync-inspector": "bin/index.js"
+  },
   "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -13,9 +17,18 @@
     "twilio-sync": "^0.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev:react": "react-scripts start",
+    "dev:node":
+      "DEBUG=twilio-sync-inspector:* nodemon --watch server --watch bin .",
+    "dev": "npm-run-all -p dev:*",
+    "start": "node .",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:8081",
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.1"
   }
 }
