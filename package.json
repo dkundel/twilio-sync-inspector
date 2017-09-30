@@ -12,14 +12,15 @@
     "express": "^4.16.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "twilio": "^3.7.0",
     "twilio-sync": "^0.6.0"
   },
   "scripts": {
     "dev:react": "react-scripts start",
-    "dev:node":
-      "DEBUG=twilio-sync-inspector:* nodemon --watch server --watch bin .",
+    "dev:node": "DEBUG=twilio-sync-inspector:* nodemon --watch server --watch bin .",
     "dev": "npm-run-all -p dev:*",
     "start": "node .",
     "build": "react-scripts build",
