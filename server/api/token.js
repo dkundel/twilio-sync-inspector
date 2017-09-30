@@ -2,22 +2,19 @@ const twilio = require('twilio');
 const { AccessToken } = twilio.jwt;
 const { SyncGrant } = AccessToken;
 
-const {
-  TWILIO_ACCOUNT_SID,
-  TWILIO_API_KEY,
-  TWILIO_API_SECRET,
-  TWILIO_SYNC_SERVICE
-} = process.env;
+const { config } = require('../config');
 
-function createToken(identity) {
+function createToken(identity, serviceSid) {
+  const config = config();
+
   const syncGrant = new SyncGrant({
-    serviceSid: TWILIO_SYNC_SERVICE
+    serviceSid: serviceSid
   });
 
   const token = new AccessToken(
-    TWILIO_ACCOUNT_SID,
-    TWILIO_API_KEY,
-    TWILIO_API_SECRET
+    config.accountSid,
+    config.apiKey,
+    config.apiSecret
   );
   token.addGrant(syncGrant);
   token.identity = identity;
@@ -26,7 +23,8 @@ function createToken(identity) {
 
 function handleTokenRequest(req, res) {
   const identity = 'twilio-sync-inspector';
-  const token = createToken(identity);
+  const serviceSid = req.query.sid;
+  const token = createToken(identity, serviceSid);
 
   res.send({ token });
 }

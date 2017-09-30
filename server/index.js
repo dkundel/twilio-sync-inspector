@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const debug = require('debug')('twilio-sync-inspector:server');
 
-const defaultConfig = require('./config.default');
+const { updateConfig, config: getConfig } = require('./config');
 const apiRoutes = require('./api');
 
 function startServer(userConfig) {
   debug('Passed config: %O', userConfig);
-  const config = { ...defaultConfig, ...userConfig };
+  updateConfig(userConfig);
+  const config = getConfig();
   debug('Working with config: %O', config);
 
   debug('Create server');
