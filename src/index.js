@@ -11,6 +11,7 @@ injectGlobal`
     height: 100%;
     margin: 0;
     padding: 0;
+    background: #f5f5f5;
   }
 `;
 
