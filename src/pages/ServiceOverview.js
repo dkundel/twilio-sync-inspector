@@ -1,21 +1,72 @@
 import React, { Component } from 'react';
 import Typography from 'material-ui/Typography';
-import CachedIcon from 'material-ui-icons/Cached';
+import FormatListNumberedIcon from 'material-ui-icons/FormatListNumbered';
+import InsertDriveFileIcon from 'material-ui-icons/InsertDriveFile';
+import AppsIcon from 'material-ui-icons/Apps';
+import { LinearProgress } from 'material-ui/Progress';
 
 import SidList from '../components/SidList';
 
 class ServiceOverviewPage extends Component {
   constructor() {
     super();
-    this.onServicesSelected = this.onServicesSelected.bind(this);
+
+    this.state = {
+      documents: [],
+      maps: [],
+      lists: [],
+      isLoaded: false
+    };
+
+    this.onDocumentSelected = this.onDocumentSelected.bind(this);
+    this.onMapSelected = this.onMapSelected.bind(this);
+    this.onListSelected = this.onListSelected.bind(this);
   }
 
-  onServicesSelected(service) {
-    console.log(service);
+  async componentWillMount() {
+    const serviceSid = this.props.match.params.sid;
+    const resp = await fetch(`/api/services/${serviceSid}`);
+    if (!resp.ok) {
+      console.error(await resp.body());
+      return;
+    }
+    const { documents, maps, lists } = await resp.json();
+    this.setState({
+      documents,
+      maps,
+      lists,
+      serviceSid,
+      isLoaded: true
+    });
+  }
+
+  onDocumentSelected(document) {
+    this.navigateTo('document', document.sid);
+  }
+
+  onMapSelected(map) {
+    this.navigateTo('map', map.sid);
+  }
+
+  onListSelected(list) {
+    this.navigateTo('list', list.sid);
+  }
+
+  navigateTo(type, sid) {
+    const { serviceSid } = this.state;
+    this.props.history.push(`/services/${serviceSid}/${type}/${sid}`);
   }
 
   render() {
-    const { sid } = this.props.match.params;
+    if (this.state.isLoaded) {
+      return this.renderLists();
+    } else {
+      return this.renderLoading();
+    }
+  }
+
+  renderLists() {
+    const sid = this.state.serviceSid;
     return (
       <div>
         <Typography type="headline">
@@ -23,31 +74,34 @@ class ServiceOverviewPage extends Component {
         </Typography>
         <Typography type="subheading">Documents</Typography>
         <SidList
-          entries={mockEntries}
-          icon={<CachedIcon />}
-          onSelect={this.onServicesSelected}
+          entries={this.state.documents}
+          icon={<InsertDriveFileIcon />}
+          onSelect={this.onDocumentSelected}
         />
         <Typography type="subheading">Maps</Typography>
         <SidList
-          entries={mockEntries}
-          icon={<CachedIcon />}
-          onSelect={this.onServicesSelected}
+          entries={this.state.maps}
+          icon={<AppsIcon />}
+          onSelect={this.onMapSelected}
         />
         <Typography type="subheading">Lists</Typography>
         <SidList
-          entries={mockEntries}
-          icon={<CachedIcon />}
-          onSelect={this.onServicesSelected}
+          entries={this.state.lists}
+          icon={<FormatListNumberedIcon />}
+          onSelect={this.onListSelected}
         />
       </div>
     );
   }
-}
 
-const mockEntries = [
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXX', uniqueName: 'some_name' },
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXY', uniqueName: 'some_name1' },
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXZ', uniqueName: 'some_name2' }
-];
+  renderLoading() {
+    return (
+      <div>
+        <Typography type="headline">Loading Service</Typography>
+        <LinearProgress />
+      </div>
+    );
+  }
+}
 
 export default ServiceOverviewPage;
