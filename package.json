@@ -1,11 +1,10 @@
 {
   "name": "twilio-sync-inspector",
-  "version": "0.1.0",
+  "version": "1.0.0--alpha.0",
   "main": "bin/index.js",
   "bin": {
     "twilio-sync-inspector": "bin/index.js"
   },
-  "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",
     "chalk": "^2.1.0",
@@ -28,6 +27,7 @@
     "twilio-sync": "^0.6.0"
   },
   "scripts": {
+    "prepublish": "npm run build",
     "dev:react": "react-scripts start",
     "dev:node": "nodemon --watch server --watch bin . --dev",
     "dev": "npm-run-all -p dev:*",
@@ -40,5 +40,18 @@
   "devDependencies": {
     "nodemon": "^1.12.1",
     "npm-run-all": "^4.1.1"
+  },
+  "license": "MIT",
+  "author": {
+    "email": "dominik.kundel@gmail.com",
+    "name": "Dominik Kundel",
+    "url": "https://github.com/dkundel"
+  },
+  "bugs": {
+    "url": "https://github.com/dkundel/twilio-sync-inspector/issues"
+  },
+  "repository": {
+    "url": "git@github.com:dkundel/twilio-sync-inspector.git",
+    "type": "git"
   }
 }
