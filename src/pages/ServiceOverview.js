@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import Typography from 'material-ui/Typography';
+import { LinearProgress } from 'material-ui/Progress';
+
 import FormatListNumberedIcon from 'material-ui-icons/FormatListNumbered';
 import InsertDriveFileIcon from 'material-ui-icons/InsertDriveFile';
 import AppsIcon from 'material-ui-icons/Apps';
-import { LinearProgress } from 'material-ui/Progress';
+import HomeIcon from 'material-ui-icons/Home';
 
+import { NavEntry, NavEntryContainer } from '../components/NavEntry';
 import SidList from '../components/SidList';
+
+const ListsWrapper = styled.div`margin-top: 20px;`;
 
 class ServiceOverviewPage extends Component {
   constructor() {
@@ -69,27 +76,32 @@ class ServiceOverviewPage extends Component {
     const sid = this.state.serviceSid;
     return (
       <div>
+        <NavEntryContainer>
+          <NavEntry href="/services" icon={<HomeIcon />} label="All Services" />
+        </NavEntryContainer>
         <Typography type="headline">
           Service <code>{sid}</code>
         </Typography>
-        <Typography type="subheading">Documents</Typography>
-        <SidList
-          entries={this.state.documents}
-          icon={<InsertDriveFileIcon />}
-          onSelect={this.onDocumentSelected}
-        />
-        <Typography type="subheading">Maps</Typography>
-        <SidList
-          entries={this.state.maps}
-          icon={<AppsIcon />}
-          onSelect={this.onMapSelected}
-        />
-        <Typography type="subheading">Lists</Typography>
-        <SidList
-          entries={this.state.lists}
-          icon={<FormatListNumberedIcon />}
-          onSelect={this.onListSelected}
-        />
+        <ListsWrapper>
+          <Typography type="subheading">Documents</Typography>
+          <SidList
+            entries={this.state.documents}
+            icon={<InsertDriveFileIcon />}
+            onSelect={this.onDocumentSelected}
+          />
+          <Typography type="subheading">Maps</Typography>
+          <SidList
+            entries={this.state.maps}
+            icon={<AppsIcon />}
+            onSelect={this.onMapSelected}
+          />
+          <Typography type="subheading">Lists</Typography>
+          <SidList
+            entries={this.state.lists}
+            icon={<FormatListNumberedIcon />}
+            onSelect={this.onListSelected}
+          />
+        </ListsWrapper>
       </div>
     );
   }
@@ -97,6 +109,9 @@ class ServiceOverviewPage extends Component {
   renderLoading() {
     return (
       <div>
+        <NavEntryContainer>
+          <NavEntry href="/services" icon={<HomeIcon />} label="All Services" />
+        </NavEntryContainer>
         <Typography type="headline">Loading Service</Typography>
         <LinearProgress />
       </div>

@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
+import JsonView from 'react-json-view';
+import styled from 'styled-components';
+
 import Typography from 'material-ui/Typography';
 import { LinearProgress } from 'material-ui/Progress';
-import JsonView from 'react-json-view';
+import Paper from 'material-ui/Paper';
 
+import CachedIcon from 'material-ui-icons/Cached';
+import HomeIcon from 'material-ui-icons/Home';
+
+import { NavEntry, NavEntryContainer } from '../components/NavEntry';
 import SyncClient from '../services/sync';
+
+const InspectorWrapper = styled(Paper)`
+  margin: 10px;
+  padding: 20px;
+  overflow-y: scroll;
+`;
 
 class InspectorPage extends Component {
   constructor() {
@@ -34,11 +47,21 @@ class InspectorPage extends Component {
     const { serviceSid, type, sid } = this.props.match.params;
     return (
       <div>
+        <NavEntryContainer>
+          <NavEntry href="/services" icon={<HomeIcon />} label="All Services" />
+          <NavEntry
+            href={`/services/${serviceSid}`}
+            icon={<CachedIcon />}
+            label={'Service ' + sid}
+          />
+        </NavEntryContainer>
         <Typography type="headline">
-          {type} <code>{sid}</code>
+          {normalizeText(type)} <code>({sid})</code>
         </Typography>
         {this.state.data ? (
-          <JsonView src={this.state.data} />
+          <InspectorWrapper elevation={6}>
+            <JsonView src={this.state.data} collapsed={2} />
+          </InspectorWrapper>
         ) : (
           <LinearProgress />
         )}
@@ -47,10 +70,8 @@ class InspectorPage extends Component {
   }
 }
 
-const mockEntries = [
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXX', uniqueName: 'some_name' },
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXY', uniqueName: 'some_name1' },
-  { sid: 'ISd14112cb34fed60d68e81bXXXXXXXXXZ', uniqueName: 'some_name2' }
-];
+function normalizeText(text) {
+  return text[0].toUpperCase() + text.substr(1);
+}
 
 export default InspectorPage;
