@@ -9,8 +9,8 @@ function updateConfig(userConfig) {
   debug('New config %0', _config);
 }
 
-function config() {
+function load() {
   return _config;
 }
 
-module.exports = { config, updateConfig };
+module.exports = { load, updateConfig };

@@ -2,10 +2,10 @@ const twilio = require('twilio');
 const { AccessToken } = twilio.jwt;
 const { SyncGrant } = AccessToken;
 
-const { config } = require('../config');
+const { load } = require('../config');
 
 function createToken(identity, serviceSid) {
-  const config = config();
+  const config = load();
 
   const syncGrant = new SyncGrant({
     serviceSid: serviceSid
