@@ -151,12 +151,12 @@ class SyncClient extends EventEmitter {
     }
 
     if (this.isMap()) {
-      const items = await this.instance.getItems();
+      const items = await this.instance.getItems({ order: 'desc' });
       return { ...this.instance.descriptor, items: items.items };
     }
 
     if (this.isList()) {
-      const items = await this.instance.getItems();
+      const items = await this.instance.getItems({ order: 'desc' });
       return { ...this.instance.descriptor, items: items.items };
     }
   }
