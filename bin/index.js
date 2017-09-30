@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const pkg = require('../package.json');
 const { Command } = require('commander');
 const { green, red } = require('chalk');
