@@ -1,6 +1,7 @@
 # Twilio Sync Inspector
 
 🔄 Easy to use inspector tool for [Twilio Sync](https://www.twilio.com/sync) services
+
 [![npm](https://img.shields.io/npm/v/twilio-sync-inspector.svg?style=flat-square)](https://npmjs.com/packages/twilio-sync-inspector) [![npm](https://img.shields.io/npm/dt/twilio-sync-inspector.svg?style=flat-square)](https://npmjs.com/packages/twilio-sync-inspector) [![npm](https://img.shields.io/npm/l/twilio-sync-inspector.svg?style=flat-square)](/LICENSE)
 
 This tool allows you to inspect the data stored in the different sync services. It will automatically update when the data in Sync changes.
