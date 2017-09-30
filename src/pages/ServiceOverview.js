@@ -113,7 +113,7 @@ class ServiceOverviewPage extends Component {
           <NavEntry href="/services" icon={<HomeIcon />} label="All Services" />
         </NavEntryContainer>
         <Typography type="headline">Loading Service</Typography>
-        <LinearProgress />
+        <LinearProgress color="accent" />
       </div>
     );
   }

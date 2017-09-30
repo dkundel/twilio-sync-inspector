@@ -57,10 +57,14 @@ class InspectorPage extends Component {
         </Typography>
         {this.state.data ? (
           <InspectorWrapper elevation={6}>
-            <JsonView src={this.state.data} collapsed={2} />
+            <JsonView
+              src={this.state.data}
+              collapsed={2}
+              theme="summerfruit:inverted"
+            />
           </InspectorWrapper>
         ) : (
-          <LinearProgress />
+          <LinearProgress color="accent" />
         )}
       </div>
     );

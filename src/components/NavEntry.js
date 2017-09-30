@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
 
+import { twilioRed } from '../utils/theme';
+
 export const NavEntryContainer = styled.div`
   margin-top: 0px;
   margin-bottom: 20px;
@@ -20,7 +22,9 @@ export class NavEntry extends Component {
     return (
       <Link to={href}>
         <Chip
-          avatar={<Avatar>{icon}</Avatar>}
+          avatar={
+            <Avatar style={{ backgroundColor: twilioRed[500] }}>{icon}</Avatar>
+          }
           label={label}
           onClick={() => {}}
         />

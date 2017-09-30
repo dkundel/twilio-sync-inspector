@@ -57,7 +57,7 @@ class ServicesPage extends Component {
     return (
       <div>
         <Typography type="headline">Loading Services</Typography>
-        <LinearProgress />
+        <LinearProgress color="accent" />
       </div>
     );
   }
