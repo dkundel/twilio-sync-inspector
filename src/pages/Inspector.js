@@ -36,9 +36,6 @@ class InspectorPage extends Component {
     client.on('removed', () => {
       this.props.history.push('/services/' + serviceSid);
     });
-    client.on('disconnected', () => {
-      this.props.history.push('/services/' + serviceSid);
-    });
     const data = await client.load(serviceSid, type, sid);
     this.setState({ data, isLoaded: true });
   }

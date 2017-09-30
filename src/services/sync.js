@@ -29,7 +29,7 @@ class SyncClient extends EventEmitter {
     }
 
     if (serviceSid !== this.serviceSid) {
-      return this.updateService(serviceSid, type, sid);
+      return this.initialize(serviceSid, type, sid);
     }
 
     if (sid !== this.sid) {
@@ -51,18 +51,6 @@ class SyncClient extends EventEmitter {
     const data = await this.getValue();
     console.log(data);
     return data;
-  }
-
-  async updateService(serviceSid, type, sid) {
-    const token = await this.fetchToken(serviceSid);
-    this.accessManager = this.createAccessManager(token);
-    this.client.updateToken(token);
-    this.instance = await this.client[type](sid);
-    this.sid = sid;
-    this.serviceSid = serviceSid;
-    this.type = type;
-    this.registerEventListeners();
-    return this.getValue();
   }
 
   async updateObject(serviceSid, type, sid) {
