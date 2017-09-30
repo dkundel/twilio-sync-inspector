@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import Typography from 'material-ui/Typography';
+import { LinearProgress } from 'material-ui/Progress';
 import JsonView from 'react-json-view';
+
+import SyncClient from '../services/sync';
 
 class InspectorPage extends Component {
   constructor() {
     super();
-    this.onServicesSelected = this.onServicesSelected.bind(this);
+    this.state = {
+      data: undefined,
+      isLoaded: false
+    };
   }
 
-  onServicesSelected(service) {
-    console.log(service);
+  async componentWillMount() {
+    const { serviceSid, type, sid } = this.props.match.params;
+    const client = SyncClient.shared();
+    client.on('updated', data => {
+      this.setState({ data });
+    });
+    client.on('removed', () => {
+      this.props.history.push('/services/' + serviceSid);
+    });
+    client.on('disconnected', () => {
+      this.props.history.push('/services/' + serviceSid);
+    });
+    const data = await client.load(serviceSid, type, sid);
+    this.setState({ data, isLoaded: true });
   }
 
   render() {
@@ -19,7 +37,11 @@ class InspectorPage extends Component {
         <Typography type="headline">
           {type} <code>{sid}</code>
         </Typography>
-        <JsonView src={mockEntries} />
+        {this.state.data ? (
+          <JsonView src={this.state.data} />
+        ) : (
+          <LinearProgress />
+        )}
       </div>
     );
   }
