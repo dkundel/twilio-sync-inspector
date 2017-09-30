@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -30,7 +30,7 @@ class App extends Component {
           </Toolbar>
         </AppBar>
         <Router>
-          <RouteContainer elevation={4}>
+          <RouteContainer elevation={2}>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/services" component={ServicesPage} />
             <Route
