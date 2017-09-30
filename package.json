@@ -29,7 +29,7 @@
   },
   "scripts": {
     "dev:react": "react-scripts start",
-    "dev:node": "nodemon --watch server --watch bin .",
+    "dev:node": "nodemon --watch server --watch bin . --dev",
     "dev": "npm-run-all -p dev:*",
     "start": "node .",
     "build": "react-scripts build",
