@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import List from 'material-ui/List';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 import SidListEntry from './SidListEntry';
 
@@ -20,6 +20,11 @@ class SidList extends Component {
             }}
           />
         ))}
+        {entries.length === 0 && (
+          <ListItem disabled>
+            <ListItemText primary="No entries" />
+          </ListItem>
+        )}
       </List>
     );
   }
