@@ -28,6 +28,12 @@ npm install -g twilio-sync-inspector
     -h, --help                   output usage information
 ```
 
+## Common Issues
+
+### Fails to load objects
+
+This tool is designed to be used during the development process and not for production apps. Therefore it requires to have [ACL](https://www.twilio.com/docs/api/sync/permissions-and-access-control) disabled to have the right permissions. 
+
 ## Contributors
 
 - [Dominik Kundel](https://github.com/dkundel)
