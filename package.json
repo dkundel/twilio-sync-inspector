@@ -20,6 +20,7 @@
     "react-scripts": "1.0.14",
     "styled-components": "^2.2.0",
     "twilio": "^3.7.0",
+    "twilio-common": "^0.1.7",
     "twilio-sync": "^0.6.0"
   },
   "scripts": {
