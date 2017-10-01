@@ -13,7 +13,8 @@ This tool allows you to inspect the data stored in the different sync services. 
   - [Documents](https://www.twilio.com/docs/api/sync/sync-documents)
   - [Maps](https://www.twilio.com/docs/api/sync/sync-maps)
   - [Lists](https://www.twilio.com/docs/api/sync/sync-lists)
-- Inspect contents of resource (for Maps and Lists limited to the latest 50 items)
+- Inspect contents of resource
+- Pick number of items fetched for a resource and the order
 - Auto update inspector view on remote changes
 - Edit data of existing resources
 
