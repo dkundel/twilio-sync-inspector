@@ -39,6 +39,97 @@ class SyncClient extends EventEmitter {
     return null;
   }
 
+  handleEdit(editInfo) {
+    if (!this.isValidPath(editInfo)) {
+      return false;
+    }
+
+    // handle async operations
+    if (this.isDoc()) {
+      this.handleEditDoc(editInfo);
+    } else if (this.isMap()) {
+      this.handleEditMap(editInfo);
+    } else if (this.isList()) {
+      this.handleEditList(editInfo);
+    }
+
+    return true;
+  }
+
+  async handleEditDoc({ updated_src }) {
+    const { data } = updated_src;
+
+    if (this.instance === undefined) {
+      return false;
+    }
+
+    const docInstance = await this.instance.update(data);
+    return docInstance;
+  }
+
+  async handleEditMap({ namespace, updated_src }) {
+    const [, idxAsString] = namespace;
+    const idx = parseInt(idxAsString);
+    const { key, data } = updated_src.items[idx].descriptor;
+
+    if (this.instance === undefined) {
+      return;
+    }
+
+    const mapItem = await this.instance.update(key, data);
+    return mapItem;
+  }
+
+  async handleEditList({ namespace, updated_src }) {
+    const [, idxAsString] = namespace;
+    const idx = parseInt(idxAsString);
+    const { index, value } = updated_src.items[idx].data;
+
+    if (this.instance === undefined) {
+      return;
+    }
+
+    const listItem = await this.instance.update(index, value);
+    return listItem;
+  }
+
+  isValidPath(editInfo) {
+    if (this.isDoc()) {
+      return editInfo.namespace[0] === 'data';
+    }
+
+    if (this.isList()) {
+      return this.checkForValidNamespace(editInfo.namespace, [
+        'items',
+        undefined,
+        'data',
+        'value'
+      ]);
+    }
+
+    if (this.isMap()) {
+      return this.checkForValidNamespace(editInfo.namespace, [
+        'items',
+        undefined,
+        'descriptor',
+        'data'
+      ]);
+    }
+  }
+
+  checkForValidNamespace(namespace, validNamespace) {
+    for (let i = 0; i < validNamespace.length; i++) {
+      let validValue = validNamespace[i];
+      if (validValue === undefined) {
+        continue;
+      }
+      if (validValue !== namespace[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   async initialize(serviceSid, type, sid) {
     const token = await this.fetchToken(serviceSid);
     this.accessManager = this.createAccessManager(token);
@@ -49,7 +140,6 @@ class SyncClient extends EventEmitter {
     this.type = type;
     this.registerEventListeners();
     const data = await this.getValue();
-    console.log(data);
     return data;
   }
 

@@ -25,6 +25,8 @@ class InspectorPage extends Component {
       data: undefined,
       isLoaded: false
     };
+
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   async componentWillMount() {
@@ -38,6 +40,10 @@ class InspectorPage extends Component {
     });
     const data = await client.load(serviceSid, type, sid);
     this.setState({ data, isLoaded: true });
+  }
+
+  handleEdit(editInfo) {
+    return SyncClient.shared().handleEdit(editInfo);
   }
 
   render() {
@@ -61,6 +67,7 @@ class InspectorPage extends Component {
               src={this.state.data}
               collapsed={2}
               theme="summerfruit:inverted"
+              onEdit={this.handleEdit}
             />
           </InspectorWrapper>
         ) : (
