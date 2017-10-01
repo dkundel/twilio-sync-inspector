@@ -1,6 +1,6 @@
 {
   "name": "twilio-sync-inspector",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "main": "bin/index.js",
   "bin": {
     "twilio-sync-inspector": "bin/index.js"
