@@ -6,6 +6,17 @@
 
 This tool allows you to inspect the data stored in the different sync services. It will automatically update when the data in Sync changes.
 
+## Features
+
+- View list of available [Sync services](https://www.twilio.com/console/sync/services)
+- View list of available resources of type
+  - [Documents](https://www.twilio.com/docs/api/sync/sync-documents)
+  - [Maps](https://www.twilio.com/docs/api/sync/sync-maps)
+  - [Lists](https://www.twilio.com/docs/api/sync/sync-lists)
+- Inspect contents of resource (for Maps and Lists limited to the latest 50 items)
+- Auto update inspector view on remote changes
+- Edit data of existing resources
+
 ## Installation
 
 ```bash
