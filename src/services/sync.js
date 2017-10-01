@@ -17,9 +17,14 @@ class SyncClient extends EventEmitter {
     this.type = undefined;
     this.sid = undefined;
     this.instance = undefined;
+    this.itemCount = undefined;
+    this.order = undefined;
   }
 
-  async load(serviceSid, type, sid) {
+  async load(serviceSid, type, sid, { itemCount, order }) {
+    this.itemCount = itemCount || 50;
+    this.order = 'desc';
+
     if (!this.isValidType(type)) {
       throw new Error('Invalid type!');
     }
@@ -54,6 +59,20 @@ class SyncClient extends EventEmitter {
     }
 
     return true;
+  }
+
+  setItemSearchConfig(itemCount, order) {
+    this.itemCount = itemCount;
+    this.order = order;
+  }
+
+  async triggerRefresh() {
+    if (this.instance === undefined) {
+      return;
+    }
+
+    const data = await this.getValue();
+    this.emit('updated', data);
   }
 
   async handleEditDoc({ updated_src }) {
@@ -241,12 +260,18 @@ class SyncClient extends EventEmitter {
     }
 
     if (this.isMap()) {
-      const items = await this.instance.getItems({ order: 'desc' });
+      const items = await this.instance.getItems({
+        order: this.order,
+        pageSize: this.itemCount
+      });
       return { ...this.instance.descriptor, items: items.items };
     }
 
     if (this.isList()) {
-      const items = await this.instance.getItems({ order: 'desc' });
+      const items = await this.instance.getItems({
+        order: this.order,
+        pageSize: this.itemCount
+      });
       return { ...this.instance.descriptor, items: items.items };
     }
   }
