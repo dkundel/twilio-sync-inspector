@@ -82,7 +82,7 @@ class SyncClient extends EventEmitter {
 
   async handleEditList({ namespace, updated_src }) {
     const [, idxAsString] = namespace;
-    const idx = parseInt(idxAsString);
+    const idx = parseInt(idxAsString, 10);
     const { index, value } = updated_src.items[idx].data;
 
     if (this.instance === undefined) {
