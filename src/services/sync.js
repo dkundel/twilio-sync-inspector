@@ -69,7 +69,7 @@ class SyncClient extends EventEmitter {
 
   async handleEditMap({ namespace, updated_src }) {
     const [, idxAsString] = namespace;
-    const idx = parseInt(idxAsString);
+    const idx = parseInt(idxAsString, 10);
     const { key, data } = updated_src.items[idx].descriptor;
 
     if (this.instance === undefined) {
