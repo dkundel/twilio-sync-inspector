@@ -23,7 +23,8 @@
     "styled-components": "^2.2.0",
     "twilio": "^3.7.0",
     "twilio-common": "^0.1.7",
-    "twilio-sync": "^0.6.0"
+    "twilio-sync": "^0.6.0",
+    "snyk": "^1.52.1"
   },
   "scripts": {
     "prepublish": "npm run build",
@@ -33,7 +34,9 @@
     "start": "node .",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "proxy": "http://localhost:8081",
   "devDependencies": {
@@ -53,5 +56,6 @@
   "repository": {
     "url": "git@github.com:dkundel/twilio-sync-inspector.git",
     "type": "git"
-  }
+  },
+  "snyk": true
 }
