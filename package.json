@@ -16,15 +16,15 @@
     "material-ui-icons": "^1.0.0-beta.10",
     "opn": "^5.1.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.0.1",
     "react-json-view": "^1.13.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "styled-components": "^2.2.0",
-    "twilio": "^3.7.0",
+    "twilio": "^3.17.1",
     "twilio-common": "^0.1.7",
     "twilio-sync": "^0.6.0",
-    "snyk": "^1.52.1"
+    "snyk": "^1.114.0"
   },
   "scripts": {
     "prepublish": "npm run build",
