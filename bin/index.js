@@ -51,7 +51,7 @@ function checkRequiredValue(argKey, envKey, name) {
   if (!value) {
     console.error(`${red('ERROR')} Missing value for ${name}`);
     console.log(
-      `Either pass the value via the command-line argument '--${key} [value]' or by saving it in you environment variables as '${envName}'.`
+      `Either pass the value via the command-line argument '--${argKey} [value]' or by saving it in you environment variables as '${envKey}'.`
     );
     process.exit(1);
   }
