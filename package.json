@@ -6,12 +6,12 @@
     "twilio-sync-inspector": "bin/index.js"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.19.2",
     "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "debug": "^3.1.0",
     "event-emitter": "^0.3.5",
-    "express": "^4.16.1",
+    "express": "^4.17.3",
     "material-ui": "^1.0.0-beta.12",
     "material-ui-icons": "^1.0.0-beta.10",
     "opn": "^5.1.0",
